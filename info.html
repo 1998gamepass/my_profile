@@ -3,120 +3,115 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>吳炳成｜不動產仲介個人簡介</title>
-  <meta name="description" content="專業不動產仲介，服務區域：彰化市。精選物件、成交案例與聯絡方式，一頁看完。" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏠</text></svg>">
-  <!-- Open Graph / 分享預覽 -->
-  <meta property="og:title" content="吳炳成｜不動產仲介" />
-  <meta property="og:description" content="專業不動產仲介，服務區域：彰化市。精選物件、成交案例與聯絡方式。" />
+  <title>吳炳成｜不動產仲介資訊頁</title>
+  <meta name="description" content="彰化市與周邊地區房仲個人頁：服務項目、專業度亮點、聯絡方式與快速行動按鈕。" />
+  <meta name="theme-color" content="#ffffff" />
+  <!-- OG 分享 -->
+  <meta property="og:title" content="吳炳成｜不動產仲介資訊頁" />
+  <meta property="og:description" content="服務於彰化市與周邊，提供屋主委託、買方代尋、估價與行銷。" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="YOUR_SITE_URL" />
-  <meta property="og:image" content="005.jpg" />
-  <meta name="twitter:card" content="001.jpg" />
+  <meta property="og:url" content="YOUR_GITHUB_PAGES_URL" />
+  <meta property="og:image" content="YOUR_OG_IMAGE_URL" /> <!-- 建議 1200x630 JPG/PNG，≤500KB -->
+  <meta name="twitter:card" content="summary_large_image" />
   
   <style>
     :root{
-      --bg: #ffffff;      /* 背景深色 */
-      --card: #12141a;    /* 卡片底色 */
-      --text: #e5e7eb;    /* 主要文字 */
-      --muted: #a1a1aa;   /* 次要文字 */
-      --brand: #0ea5e9;   /* 主色 (青藍) */
-      --brand-2: #22d3ee; /* 輔色 (水藍) */
-      --ok: #22c55e;      /* 強調 */
-      --warn:#f59e0b;
-      --maxw: 1100px;
-      --radius: 18px;
+      /* === 色彩：淺色背景（藍/橘點綴）=== */
+      --bg1:#ffffff;        /* 主背景 */
+      --bg2:#f6f9fe;        /* 次背景（淡藍）*/
+      --bg3:#fff7ed;        /* 次背景（淡橘）*/
+      --text:#0b0c0f;       /* 主要文字 */
+      --muted:#60636a;      /* 次要文字 */
+      --blue:#0ea5e9;       /* 主藍 */
+      --orange:#fb923c;     /* 點綴橘 */
+      --border:rgba(0,0,0,.08);
+      --shadow:0 10px 28px rgba(0,0,0,.08);
+      --radius:18px;
+      --maxw:1100px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:linear-gradient(180deg,#0a0b0d, #0b1220 60%, #0a0b0d);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";}
+    html,body{margin:0;color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial}
+    body{
+      background:
+        radial-gradient(800px 420px at 85% -10%, rgba(14,165,233,.12), transparent),
+        radial-gradient(700px 360px at 10% 110%, rgba(251,146,60,.12), transparent),
+        linear-gradient(180deg,var(--bg1),var(--bg2) 50%, var(--bg1));
+    }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:var(--maxw);margin:0 auto;padding:20px}
-    .badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg, rgba(34,211,238,.15), rgba(14,165,233,.15));border:1px solid rgba(255,255,255,.08);padding:6px 10px;border-radius:999px;color:#c7f9ff}
-    .badge svg{width:14px;height:14px;}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);backdrop-filter: blur(6px);}
-    .shadow{box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04)}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(14,165,233,.15), rgba(34,211,238,.10));color:white;font-weight:600}
-    .btn:hover{border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
-    .btn.secondary{background:transparent}
-    .btn.small{padding:8px 12px;border-radius:12px;font-weight:500}
 
-    /* 導覽 */
-    header{position:sticky;top:0;z-index:20;background:rgba(10,12,16,.55);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,.08)}
+    /* Header */
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .nav .brand{display:flex;align-items:center;gap:12px}
-    .nav img.logo{width:36px;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img.logo{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);object-fit:contain}
     .nav a{color:var(--muted)}
-    .nav a:hover{color:#fff}
+    .nav a:hover{color:#111}
 
-    /* Hero 區 */
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;padding:36px 0}
-    .hero .title{font-size:40px;line-height:1.15;margin:10px 0 8px}
-    .hero .title .accent{color:var(--brand-2)}
-    .hero p.lead{color:#d1d5db;font-size:18px}
-    .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
-    .hero .panel{padding:18px}
-    .avatar{width:140px;height:140px;border-radius:26px;border:1px solid rgba(255,255,255,.18);overflow:hidden}
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center;padding:28px 0}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(90deg, rgba(14,165,233,.10), rgba(251,146,60,.10));color:#094263}
+    .title{font-size:38px;line-height:1.15;margin:10px 0 8px}
+    .accent-blue{color:var(--blue)}
+    .accent-orange{color:var(--orange)}
+    .lead{color:var(--muted);font-size:18px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 
-    /* 區塊標題 */
-    .section{padding:26px}
-    .section h2{font-size:24px;margin:0 0 14px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid var(--border);box-shadow:var(--shadow);font-weight:600}
+    .btn.primary{background:linear-gradient(180deg, rgba(14,165,233,.14), rgba(14,165,233,.08));color:#0b3b58}
+    .btn.secondary{background:linear-gradient(180deg, rgba(251,146,60,.16), rgba(251,146,60,.08));color:#5a2c00}
+
+    .panel{padding:18px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}
+    .avatar{width:140px;height:140px;border-radius:26px;border:1px solid var(--border);overflow:hidden;margin:0 auto 10px}
+    .avatar img{width:100%;height:100%;object-fit:cover;object-position:center}
+
+    /* 專業度亮點 */
+    .section{padding:22px}
+    .section h2{font-size:24px;margin:0 0 12px}
     .muted{color:var(--muted)}
+    .kvs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .kv{padding:14px;border-radius:14px;border:1px dashed var(--border);background:#fff}
+    .kv .big{font-weight:800;font-size:22px;color:#0b0c0f}
+    .kv .small{font-size:12px;color:var(--muted)}
 
-    /* 服務與亮點 */
     .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+    .chip{padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,1), rgba(14,165,233,.06))}
 
-    /* 精選物件 */
+    /* 服務項目卡片 */
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .tile{overflow:hidden;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00))}
-    .tile .meta{padding:12px}
-    .price{font-weight:700}
+    .card{padding:16px;border-radius:16px;border:1px solid var(--border);background:#fff;box-shadow:var(--shadow)}
 
-    /* 評語 */
-    .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .quote{padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+    /* 圖片規格說明 */
+    .hint{font-size:12px;color:var(--muted)}
 
-    /* 聯絡 */
-    .contact{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
-    .kvs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .kv{padding:14px;border-radius:14px;border:1px dashed rgba(255,255,255,.18)}
-
-    footer{padding:30px 20px;color:var(--muted);text-align:center}
-
+    /* RWD */
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr}
-      .contact{grid-template-columns:1fr}
       .grid{grid-template-columns:repeat(2,1fr)}
-      .quotes{grid-template-columns:1fr}
+      .kvs{grid-template-columns:repeat(3,1fr)}
     }
-    @media (max-width: 600px){
+    @media (max-width: 640px){
+      .title{font-size:30px}
       .grid{grid-template-columns:1fr}
-      .hero .title{font-size:32px}
+      .kvs{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
 <body>
-  <!--
-    【請先替換】以下文字/連結：
-    1) 名字、電話、Email、LINE ID、服務區域、經紀人證號、品牌Logo與個人照片。
-    2) 精選物件連結（可指向 591、樂屋網、你自己的刊登頁）。
-    3) OG 參數 (head 裡 YOUR_SITE_URL/YOUR_OG_IMAGE_URL)。
-  -->
-  
   <header>
     <div class="container nav">
       <div class="brand">
-        <img class="logo" alt="Logo" src="003.jpg" />
+        <!-- Logo 建議尺寸：SVG 或 256×256 PNG（≤50KB） -->
+        <img class="logo" alt="Logo" src="https://placehold.co/256x256/png" />
         <div>
           <div style="font-weight:700">吳炳成</div>
           <div class="muted" style="font-size:13px">不動產仲介｜經紀人證號 (114)484908</div>
         </div>
       </div>
       <nav style="display:flex; gap:16px;">
-        <a href="#about">關於</a>
-        <a href="#listings">精選物件</a>
-        <a href="#testimonials">評語</a>
+        <a href="#expertise">專業度</a>
+        <a href="#services">服務</a>
         <a href="#contact">聯絡</a>
       </nav>
     </div>
@@ -126,141 +121,123 @@
     <!-- Hero -->
     <section class="hero">
       <div>
-        <span class="badge">
-          <!-- house icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5Z"/></svg>
-          服務區域：彰化縣|彰化市/花壇鄉/秀水鄉/和美鎮
-        </span>
-        <h1 class="title">幫你<span class="accent">更快成交</span>，也幫你買到<span class="accent">更好的家</span></h1>
-        <p class="lead">專注大彰化住宅與店面，重視誠信、透明與效率。從估價、行銷曝光、帶看到議價與簽約，全程親辦。</p>
+        <span class="badge">服務區域：彰化市｜花壇鄉｜秀水鄉｜和美鎮</span>
+        <h1 class="title">用<span class="accent-blue">資料與流程</span>，讓成交<span class="accent-orange">更快更安心</span></h1>
+        <p class="lead">專注大彰化住宅與店面。從定價策略、行銷曝光、帶看動線到議約文件，重視誠信、透明與效率。</p>
         <div class="actions">
-          <a class="btn" href="tel:+886963663326">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.44 12.44 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.44 12.44 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            立即來電
-          </a>
-          <a class="btn secondary" href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 4.418-4.03 8-9 8-1.058 0-2.07-.158-3.008-.448L5 19l1.62-3.24C5.61 14.52 5 12.83 5 11c0-4.418 4.03-8 9-8s9 3.582 9 7z"/></svg>
-            LINE 諮詢
-          </a>
-          <a class="btn secondary" href="mailto:lb00964276@gmail.com">Email</a>
-          <button class="btn secondary" id="download-vcard">存到通訊錄</button>
+          <a class="btn primary" href="tel:+886963663326">立即來電</a>
+          <a class="btn secondary" href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">LINE 諮詢</a>
+          <a class="btn" style="background:#fff" href="mailto:lb00964276@gmail.com">Email</a>
+          <button class="btn" id="download-vcard" style="background:#fff">存到通訊錄</button>
         </div>
       </div>
-      <div class="card panel shadow" style="text-align:center">
-        <div class="avatar" style="margin:0 auto 10px"><img alt="你的照片" src="002.jpg" /></div>
+      <div class="panel" style="text-align:center">
+        <!-- 個人照片 建議尺寸：600×600 JPG/PNG（≤200KB）；顯示為 140×140，超出裁切居中 -->
+        <div class="avatar"><img alt="你的照片" src="https://placehold.co/600x600/jpg" /></div>
         <div style="font-weight:700;font-size:18px">吳炳成</div>
-        <div class="muted" style="font-size:14px">不動產營業員｜經紀人證號 (114)484908</div>
+        <div class="muted" style="font-size:14px">大家房屋 彰化民族店｜(114)484908</div>
         <div class="kvs" style="margin-top:12px">
-          <div class="kv">成交件數<br><b>120+</b></div>
-          <div class="kv">平均成交天數<br><b>28 天</b></div>
-          <div class="kv">回頭客比例<br><b>60%</b></div>
+          <div class="kv"><div class="big">120+</div><div class="small">成交件數</div></div>
+          <div class="kv"><div class="big">28 天</div><div class="small">平均成交天數</div></div>
+          <div class="kv"><div class="big">60%</div><div class="small">回頭客比例</div></div>
         </div>
       </div>
     </section>
 
-    <!-- 關於 / 服務 -->
-    <section id="about" class="section card shadow">
-      <h2>服務與專長</h2>
-      <p class="muted">屋主委託｜買方代尋｜市場估價｜行銷曝光｜開放日帶看</p>
-      <div class="chips" style="margin-top:10px">
-        <span class="chip">火車站 800 公尺內</span>
-        <span class="chip">學區宅</span>
-        <span class="chip">電梯大樓</span>
-        <span class="chip">一樓店面</span>
-        <span class="chip">收租置產</span>
-      </div>
-    </section>
-
-    <!-- 精選物件 -->
-    <section id="listings" class="section">
-      <h2>精選物件</h2>
-      <div class="muted" style="margin-bottom:10px">以下為示意連結，可改為 591／樂屋網／自有頁面。</div>
+    <!-- 專業度（強調區塊） -->
+    <section id="expertise" class="section">
+      <h2>專業度｜讓你更快、更穩地完成交易</h2>
+      <p class="muted">用制度與流程降低風險、用數據提升效率，從委託到過戶每一步都可追蹤。</p>
       <div class="grid">
-        <a class="tile" href="https://sale.591.com.tw/" target="_blank" rel="noopener">
-          <img alt="物件一" src="https://placehold.co/800x520/jpg" />
-          <div class="meta">
-            <div>市區高樓景觀 3 房 2 廳 2 衛｜近捷運</div>
-            <div class="muted">33 坪｜高樓層｜社區中庭</div>
-            <div class="price">$3,680 萬</div>
-          </div>
-        </a>
-        <a class="tile" href="https://sale.591.com.tw/" target="_blank" rel="noopener">
-          <img alt="物件二" src="https://placehold.co/800x520/jpg" />
-          <div class="meta">
-            <div>花壇新成屋 2 房｜學區宅</div>
-            <div class="muted">23 坪｜邊間採光｜管理佳</div>
-            <div class="price">$1,980 萬</div>
-          </div>
-        </a>
-        <a class="tile" href="https://sale.591.com.tw/" target="_blank" rel="noopener">
-          <img alt="物件三" src="https://placehold.co/800x520/jpg" />
-          <div class="meta">
-            <div>彰化市收租套房包租</div>
-            <div class="muted">整層 6 間｜近商圈</div>
-            <div class="price">$2,480 萬</div>
-          </div>
-        </a>
+        <div class="card">
+          <h3>合規與文件</h3>
+          <p class="muted">完整揭露與簽約檢核清單，契約條款逐條說明，避免爭議。</p>
+        </div>
+        <div class="card">
+          <h3>市場與定價</h3>
+          <p class="muted">實價登錄、近三月帶看熱度與社區行情，產出定價與議價策略。</p>
+        </div>
+        <div class="card">
+          <h3>行銷與曝光</h3>
+          <p class="muted">高品質照片與動線稿、跨平台刊登與成效追蹤，專人帶看回饋紀錄。</p>
+        </div>
+      </div>
+      <div class="chips" style="margin-top:12px">
+        <span class="chip">專營：彰化市｜花壇｜秀水｜和美</span>
+        <span class="chip">住宅／店面／收租</span>
+        <span class="chip">估價與稅務諮詢</span>
+        <span class="chip">開放日帶看與議約</span>
       </div>
     </section>
 
-    <!-- 客戶評語 -->
-    <section id="testimonials" class="section card shadow">
-      <h2>客戶評語</h2>
-      <div class="quotes">
-        <div class="quote">「從估價到談判都很透明，兩週內就賣掉。」— 吳先生（屋主）</div>
-        <div class="quote">「幫我們避開凶宅與嫌惡設施，溝通專業有效率。」— 林小姐（首購）</div>
-        <div class="quote">「出租流程與驗屋細節很完整，值得信任。」— 黃先生（投資）</div>
+    <!-- 服務項目 -->
+    <section id="services" class="section">
+      <h2>服務項目</h2>
+      <div class="grid">
+        <div class="card">
+          <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
+          <img src="https://placehold.co/800x520/jpg" alt="屋主委託" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <h3>屋主委託</h3>
+          <p class="muted">拍攝、文案、刊登到帶看與議約，全程透明回報，縮短待售時間。</p>
+        </div>
+        <div class="card">
+          <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
+          <img src="https://placehold.co/800x520/jpg" alt="買方代尋" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <h3>買方代尋</h3>
+          <p class="muted">依通勤、學區、預算與屋況條件組合方案，安排動線式看屋。</p>
+        </div>
+        <div class="card">
+          <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
+          <img src="https://placehold.co/800x520/jpg" alt="估價與行銷" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <h3>估價與行銷</h3>
+          <p class="muted">社區行情、實價資料與需求熱度綜合判讀，給出合理定價與曝光計畫。</p>
+        </div>
       </div>
+      <p class="hint" style="margin-top:8px">＊圖片尺寸標註皆為建議輸出，實際顯示會自動維持 16:10 比例裁切。</p>
     </section>
 
     <!-- 聯絡 -->
     <section id="contact" class="section">
       <h2>聯絡方式</h2>
-      <div class="contact">
-        <div class="card shadow" style="padding:16px">
+      <div class="grid" style="grid-template-columns:1.1fr .9fr">
+        <div class="card">
           <p><b>電話：</b><a href="tel:+886963663326">0963-663326</a></p>
-          <p><b>LINE：</b><a href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">79829221</a></p>
+          <p><b>LINE：</b><a href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">加入好友</a></p>
           <p><b>Email：</b><a href="mailto:lb00964276@gmail.com">lb00964276@gmail.com</a></p>
-          <p class="muted">服務時段：09:00–20:00｜可預約夜間/假日看屋</p>
+          <p class="muted">服務時段：09:00–20:00（可預約夜間/假日看屋）</p>
           <div class="actions" style="margin-top:8px">
-            <a class="btn" href="tel:+886963663326">撥打電話</a>
+            <a class="btn primary" href="tel:+886963663326">撥打電話</a>
             <a class="btn secondary" href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">加 LINE</a>
-            <a class="btn secondary" href="mailto:lb00964276@gmail.com">寄信</a>
+            <a class="btn" style="background:#fff" href="mailto:lb00964276@gmail.com">寄信</a>
           </div>
         </div>
-        <div class="card shadow" style="padding:0; overflow:hidden">
-          <!-- 地圖可改你的商圈位置：下方 q= 搜尋字詞即可 -->
-          <iframe title="地圖" style="width:100%;height:280px;border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://maps.app.goo.gl/XtuXNhaSeCa7YKe9A"></iframe>
+        <div class="card">
+          <h3>服務地區</h3>
+          <p class="muted">彰化市及周邊：花壇、秀水、和美（其他地區可來訊評估）。</p>
+          <!-- 代表社區照 建議：1200×750（16:10）JPG，≤400KB -->
+          <img src="https://placehold.co/1200x750/jpg" alt="服務地區示意" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container">
-      <div>© <span id="year"></span> 吳炳成｜不動產仲介。所有內容僅供參考，實際以契約為準。</div>
-      <div style="margin-top:6px">隱私權：本頁無追蹤 Cookie；如以表單聯絡，資料僅用於回覆，不另作他用。</div>
-    </div>
+  <footer class="container" style="color:var(--muted);text-align:center;padding:26px 20px">
+    © <span id="year"></span> 吳炳成｜不動產仲介。內容僅供參考，實際以契約為準。
   </footer>
 
-  <!-- 結構化資料（請替換 placeholder 值） -->
+  <!-- 結構化資料（請按需求替換） -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
-    "name": "吳炳成",
-    "url": "YOUR_SITE_URL",
-    "areaServed": ["彰化縣", "彰化市"],
-    "telephone": "0963-663326",
-    "email": "lb00964276@gmail.com",
-    "image": "001_20250818_精修.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "彰化市",
-      "addressCountry": "TW"
-    },
-    "sameAs": ["https://line.me/ti/p/~79829221"]
+    "@context":"https://schema.org",
+    "@type":"RealEstateAgent",
+    "name":"吳炳成",
+    "url":"YOUR_GITHUB_PAGES_URL",
+    "areaServed":["彰化市","花壇鄉","秀水鄉","和美鎮"],
+    "telephone":"+886-963-663-326",
+    "email":"lb00964276@gmail.com",
+    "image":"YOUR_PROFILE_IMAGE_URL",
+    "address":{"@type":"PostalAddress","addressLocality":"彰化市","addressCountry":"TW"},
+    "sameAs":["https://line.me/ti/p/ESwC3DEJCA"]
   }
   </script>
 
@@ -268,27 +245,22 @@
     // 年份
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 下載 vCard（自動由頁面資訊組成，可自行修改）
-    document.getElementById('download-vcard').addEventListener('click', () => {
-      const name = '吳炳成';
-      const phone = '+886963663326';
-      const email = 'lb00964276@gmail.com';
-      const line = '79829221';
-      const org = '不動產仲介|大家房屋彰化民族店';
-      const vcard = [
+    // 下載 vCard（可自行修改）
+    document.getElementById('download-vcard')?.addEventListener('click', () => {
+      const v = [
         'BEGIN:VCARD',
         'VERSION:3.0',
-        `FN:${name}`,
-        `ORG:${org}`,
-        `TEL;TYPE=CELL:${phone}`,
-        `EMAIL:${email}`,
-        `URL:https://line.me/ti/p/ESwC3DEJCA`,
+        'FN:吳炳成',
+        'ORG:不動產仲介|大家房屋彰化民族店',
+        'TEL;TYPE=CELL:+886963663326',
+        'EMAIL:lb00964276@gmail.com',
+        'URL:https://line.me/ti/p/ESwC3DEJCA',
         'END:VCARD'
       ].join('\n');
-      const blob = new Blob([vcard], { type: 'text/vcard' });
+      const blob = new Blob([v], { type: 'text/vcard' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url; a.download = `${name}.vcf`; a.click();
+      a.href = url; a.download = '吳炳成.vcf'; a.click();
       URL.revokeObjectURL(url);
     });
   </script>
