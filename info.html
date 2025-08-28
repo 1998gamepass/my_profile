@@ -1,44 +1,94 @@
 <!doctype html>
-"email": "lb00964276@gmail.com",
-"image": "https://drive.google.com/uc?export=view&id=1cvCJUOhixAcpHxhDKsbJu8S1kU0I4Eun",
-"address": {
-"@type": "PostalAddress",
-"addressLocality": "彰化市",
-"addressCountry": "TW"
-},
-"sameAs": ["https://line.me/ti/p/~79829221"]
-}
-</script>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>歡迎進入｜吳炳成 不動產</title>
+  <meta name="description" content="歡迎光臨，將自動前往資訊頁。" />
+  <meta name="robots" content="noindex,follow" />
+  <!-- Fallback：3 秒後自動跳轉（即使停用 JS 也能導向） -->
+  <meta http-equiv="refresh" content="3;url=info.html" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🏠</text></svg>">
+  <link rel="prefetch" href="info.html" as="document" />
+  <style>
+    :root{
+      --bg1:#0a0b0d; --bg2:#0b1220; --text:#e5e7eb; --muted:#a1a1aa; --brand:#22d3ee;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;color:var(--text);font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial}
+    .wrap{min-height:100%;display:grid;place-items:center;background:radial-gradient(1200px 600px at 70% -10%, rgba(34,211,238,.18), transparent),linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg1))}
+    .card{width:min(680px,92vw);padding:32px 24px;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));backdrop-filter: blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05)}
+    .brand{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+    .logo{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.25)}
+    h1{margin:.2rem 0 0;font-size:24px}
+    p{margin:.4rem 0;color:var(--muted)}
+    .row{display:flex;align-items:center;gap:14px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.18);color:#fff;background:linear-gradient(180deg, rgba(34,211,238,.18), rgba(14,165,233,.12));font-weight:600}
+    .btn:hover{transform:translateY(-1px)}
+    .ghost{background:transparent}
+    .timer{display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border-radius:999px;border:1px dashed rgba(255,255,255,.18);color:#c7f9ff}
+    .spin{width:18px;height:18px;border-radius:999px;border:2px solid rgba(255,255,255,.25);border-top-color:var(--brand);animation:sp 1s linear infinite}
+    @keyframes sp{to{transform:rotate(1turn)}}
+    .tips{margin-top:14px;color:var(--muted);font-size:14px}
+    .tips a{color:#c7f9ff}
+    footer{position:fixed;inset:auto 0 8px;display:grid;place-items:center;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="brand">
+        <img class="logo" alt="Logo" src="https://drive.google.com/uc?export=view&id=1cvCJUOhixAcpHxhDKsbJu8S1kU0I4Eun" />
+        <div>
+          <div style="font-weight:700">吳炳成｜不動產仲介</div>
+          <div style="font-size:13px;color:#a1a1aa">歡迎光臨，將為你導向資訊頁</div>
+        </div>
+      </div>
+      <h1>讓你更快成交，也幫你買到更好的家</h1>
+      <p>即將自動前往詳細資訊頁（物件、評語、聯絡方式）。如果未自動跳轉，請點「立即進入」。</p>
+      <div class="row">
+        <button id="enter" class="btn">立即進入</button>
+        <div class="timer"><span class="spin" aria-hidden="true"></span><span aria-live="polite">將於 <b id="sec">2</b> 秒後跳轉</span></div>
+      </div>
+      <div class="tips">若想直接略過歡迎頁，可分享這個網址：<code>?skipSplash=1</code></div>
+      <noscript>
+        <p class="tips">你的瀏覽器停用 JavaScript，系統將於 3 秒後自動導向；或<a href="info.html">按此直接前往</a>。</p>
+      </noscript>
+    </section>
+  </main>
+  <footer>© <span id="y"></span> 吳炳成｜不動產仲介</footer>
 
+  <script>
+    // === 可調整參數 ===
+    const TARGET_DEFAULT = 'info.html';   // 你的資訊頁檔名（請把原本 index.html 另存為 info.html）
+    const DELAY_MS = 2000;                // 自動跳轉延遲（毫秒）
 
-<script>
-// 年份
-document.getElementById('year').textContent = new Date().getFullYear();
+    // 實用：若網址帶 ?to=xxx.html 則覆蓋目標，例如 index.html?to=profile.html
+    const url = new URL(location.href);
+    let target = url.searchParams.get('to') || TARGET_DEFAULT;
 
+    // 若帶 ?skipSplash=1，直接跳資訊頁（可在名片或 QR Code 用這個參數）
+    if (url.searchParams.get('skipSplash') === '1') {
+      location.replace(target);
+    }
 
-// 下載 vCard（自動由頁面資訊組成，可自行修改）
-document.getElementById('download-vcard').addEventListener('click', () => {
-const name = '吳炳成';
-const phone = '+886963663326';
-const email = 'lb00964276@gmail.com';
-const line = '79829221';
-const org = '不動產仲介|大家房屋彰化民族店';
-const vcard = [
-'BEGIN:VCARD',
-'VERSION:3.0',
-`FN:${name}`,
-`ORG:${org}`,
-`TEL;TYPE=CELL:${phone}`,
-`EMAIL:${email}`,
-`URL:https://line.me/ti/p/ESwC3DEJCA`,
-'END:VCARD'
-].join('\n');
-const blob = new Blob([vcard], { type: 'text/vcard' });
-const url = URL.createObjectURL(blob);
-const a = document.createElement('a');
-a.href = url; a.download = `${name}.vcf`; a.click();
-URL.revokeObjectURL(url);
-});
-</script>
+    // 倒數顯示
+    const secEl = document.getElementById('sec');
+    let left = Math.ceil(DELAY_MS/1000);
+    secEl.textContent = left;
+    const tick = setInterval(()=>{ left--; if(left>=0) secEl.textContent = left; }, 1000);
+
+    // 自動跳轉
+    const t = setTimeout(()=>{ location.href = target; }, DELAY_MS);
+
+    // 立即進入按鈕
+    document.getElementById('enter').addEventListener('click', ()=>{
+      clearTimeout(t); clearInterval(tick);
+      location.href = target;
+    });
+
+    // 年份
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
