@@ -38,7 +38,7 @@
         linear-gradient(180deg,var(--bg1),var(--bg2) 50%, var(--bg1));
     }
     a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
+    img{max-width:100%;display:block}a img{cursor:pointer} /* 圖片可點時，游標變手指 */
     .container{max-width:var(--maxw);margin:0 auto;padding:20px}
 
     /* Header */
@@ -103,7 +103,10 @@
     <div class="container nav">
       <div class="brand">
         <!-- Logo 建議尺寸：SVG 或 256×256 PNG（≤50KB） -->
-        <img class="logo" alt="Logo" src="003.jpg" />
+        <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+          <img class="logo" alt="Logo" src="003.jpg" />
+        </a>
+
         <div>
           <div style="font-weight:700">吳炳成</div>
           <div class="muted" style="font-size:13px">不動產仲介｜經紀人證號 (114)484908</div>
@@ -133,7 +136,10 @@
       </div>
       <div class="panel" style="text-align:center">
         <!-- 個人照片 建議尺寸：600×600 JPG/PNG（≤200KB）；顯示為 140×140，超出裁切居中 -->
-        <div class="avatar"><img alt="你的照片" src="002.jpg" /></div>
+        <div class="avatar"> <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+          <img alt="你的照片" src="002.jpg" />
+            </a>
+        </div>
         <div style="font-weight:700;font-size:18px">吳炳成</div>
         <div class="muted" style="font-size:14px">大家房屋 彰化民族店｜(114)484908</div>
         <div class="kvs" style="margin-top:12px">
@@ -176,19 +182,25 @@
       <div class="grid">
         <div class="card">
           <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
-          <img src="007.jpg" alt="屋主委託" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+            <img src="007.jpg" alt="屋主委託" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          </a>
           <h3>屋主委託</h3>
           <p class="muted">拍攝、文案、刊登到帶看與議約，全程透明回報，縮短待售時間。</p>
         </div>
         <div class="card">
           <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
-          <img src="008.jpg" alt="買方代尋" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+            <img src="007.jpg" alt="買方代尋" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          </a>
           <h3>買方代尋</h3>
           <p class="muted">依通勤、學區、預算與屋況條件組合方案，安排動線式看屋。</p>
         </div>
         <div class="card">
           <!-- 圖片建議：800×520（16:10）JPG，≤350KB -->
-          <img src="009.jpg" alt="估價與行銷" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+            <img src="007.jpg" alt="屋主委託" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          </a>
           <h3>估價與行銷</h3>
           <p class="muted">社區行情、實價資料與需求熱度綜合判讀，給出合理定價與曝光計畫。</p>
         </div>
@@ -209,13 +221,16 @@
             <a class="btn primary" href="tel:+886963663326">撥打電話</a>
             <a class="btn secondary" href="https://line.me/ti/p/ESwC3DEJCA" target="_blank" rel="noopener">加 LINE</a>
             <a class="btn" style="background:#fff" href="mailto:lb00964276@gmail.com">寄信</a>
+            <a class="btn" href="https://your-company.example.com" target="_blank" rel="noopener">官方網站</a>
           </div>
         </div>
         <div class="card">
           <h3>服務地區</h3>
           <p class="muted">彰化市及周邊：花壇、秀水、和美（其他地區可來訊評估）。</p>
           <!-- 代表社區照 建議：1200×750（16:10）JPG，≤400KB -->
-          <img src="home.png" alt="服務地區示意" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          <a href="https://www.google.com/aclk?sa=L&ai=DChsSEwiR0Prf6K6PAxXfwRYFHbxRFwcYACICCAEQABoCdGw&co=1&ase=2&gclid=Cj0KCQjw_L_FBhDmARIsAItqgt4NqEF5riSSVBMZo7scgB3vuLkKogPpNRevVxwS5aX7BYlcqAKBLy4aAuXAEALw_wcB&cce=2&category=acrcp_v1_32&sig=AOD64_3Rf4m77S1mVvoyI9PQXY1gMwaWdQ&q&nis=4&adurl&ved=2ahUKEwjtpvTf6K6PAxX7dfUHHc0BNc4Q0Qx6BAgXEAE" target="_blank" rel="noopener">
+            <img src="home.png" alt="服務地區示意" style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px"/>
+          </a>
         </div>
       </div>
     </section>
