@@ -48,7 +48,7 @@
       <p>即將自動前往詳細資訊頁（物件、評語、聯絡方式）。如果未自動跳轉，請點「立即進入」。</p>
       <div class="row">
         <button id="enter" class="btn">立即進入</button>
-        <div class="timer"><span class="spin" aria-hidden="true"></span><span aria-live="polite">將於 <b id="sec">2</b> 秒後跳轉</span></div>
+        <div class="timer"><span class="spin" aria-hidden="true"></span><span aria-live="polite">將於 <b id="sec">3</b> 秒後跳轉</span></div>
       </div>
       <div class="tips">若想直接略過歡迎頁，可分享這個網址：<code>?skipSplash=1</code></div>
       <noscript>
@@ -61,7 +61,7 @@
   <script>
     // === 可調整參數 ===
     const TARGET_DEFAULT = 'info.html';   // 你的資訊頁檔名（請把原本 index.html 另存為 info.html）
-    const DELAY_MS = 2000;                // 自動跳轉延遲（毫秒）
+    const DELAY_MS = 3000;                // 自動跳轉延遲（毫秒）
 
     // 實用：若網址帶 ?to=xxx.html 則覆蓋目標，例如 index.html?to=profile.html
     const url = new URL(location.href);
