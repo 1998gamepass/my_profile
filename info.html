@@ -110,6 +110,44 @@
       .grid{grid-template-columns:1fr}
       .kvs{grid-template-columns:1fr 1fr}
     }
+    /* === Mobile-first 修復補丁（貼在現有 CSS 之後）=== */
+
+    /* 1) 文字在窄螢幕自動換行、避免溢出遮蓋 */
+    :where(h1,h2,h3,p,li,small,button,a,span){
+      overflow-wrap:anywhere;          /* 強制長字串自動斷行（網址、英數） */
+      word-break:break-word;           /* CJK 與混合內容更穩定換行 */
+      line-height:1.5;                 /* 行高加大，避免上下重疊 */
+    }
+
+    /* 2) Sticky header 捲動到錨點(#services/#contact)時，不會被頂部蓋住 */
+    :where(h1,h2,h3,[id]){ scroll-margin-top: 72px; }
+
+    /* 3) Flex/Grid 子項預設 min-width:auto 會撐破容器 → 允許收縮避免擠壓遮蓋 */
+    :where(.grid, .kvs, .actions, .nav, .hero, .contact) > * { min-width: 0; }
+
+    /* 4) 小螢幕時讓版面更早「單欄化」，避免左右擠壓重疊 */
+    @media (max-width: 768px){
+      .hero{ grid-template-columns: 1fr !important; }
+      .grid{ grid-template-columns: 1fr !important; }
+      .kvs { grid-template-columns: 1fr 1fr !important; }
+    }
+
+    /* 5) 流體字級：避免手機字太大把內容擠出來 */
+    .title{ font-size: clamp(24px, 6vw, 38px) !important; }
+    .lead { font-size: clamp(14px, 4vw, 18px) !important; }
+
+    /* 6) 行動按鈕列允許換行，並拉開縱向間距避免互相覆蓋 */
+    .actions{
+      flex-wrap: wrap !important;
+      row-gap: 10px;
+    }
+
+    /* 7) 卡片與徽章上的文字，不要被內部圖片或邊框擠出 */
+    .card, .panel, .badge{ overflow: hidden; }
+    
+    /* 8) 圖片保證不超出容器；若設定固定比例，仍以 cover 填滿 */
+    img{ max-width:100%; height:auto; display:block; }
+
   </style>
 </head>
 <body>
