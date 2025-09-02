@@ -56,6 +56,9 @@
       .drop{font-size:38px}
       .btn{padding:8px 10px}
     }
+        /* 點擊後一定使用 pop 動畫（蓋過 .drop.fast 的 fall） */
+    .drop.hit{ animation: pop .22s ease-out both !important; }
+
   </style>
 </head>
 <body>
@@ -74,7 +77,7 @@
       <p class="muted" style="margin:0 0 10px">物品會不停從上方掉落，點一下 +1～+5 分。沒有結局，玩到開心為止。</p>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
         <button class="btn" id="start">開始遊戲</button>
-        <button class="btn orange" id="mute">靜音</button>
+        <button class="btn orange" id="mute">感謝語</button>
       </div>
       <p class="muted" style="font-size:12px;margin-top:10px">貼心提示：可以把這頁加入主畫面，隨時開玩。</p>
     </div>
@@ -96,11 +99,11 @@
       {ch:'📦', pts:1},
       {ch:'🧱', pts:1}
     ];
-    const MIN_DUR = 4.2;   // 掉落最短秒數
+    const MIN_DUR = 2.25;   // 掉落最短秒數
     const MAX_DUR = 9.0;   // 掉落最長秒數
     const SPAWN_START = 900; // 初始產生間隔(ms)
-    const SPAWN_MIN = 420;   // 最快間隔(ms)
-    const SPAWN_ACCEL = 0.995; // 每次生成後乘上此係數 → 漸快
+    const SPAWN_MIN = 300;   // 最快間隔(ms)
+    const SPAWN_ACCEL = 0.975; // 每次生成後乘上此係數 → 漸快
     const MAX_NODES = 36;    // 螢幕上最多掉落物，避免卡頓
 
     // 狀態
@@ -125,7 +128,7 @@
 
     // 音效控制（預設開啟）
     let muted = false;
-    $mute.addEventListener('click', ()=>{ muted = !muted; $mute.textContent = muted ? '取消靜音' : '靜音'; });
+    $mute.addEventListener('click', ()=>{ muted = !muted; $mute.textContent = muted ? '謝謝您對於我的好奇而點進了這個網站!!!' : '只有這個頭像是遊戲，在其他地方點擊連結吧'; });
 
     // 開始
     $start.addEventListener('click', startGame);
@@ -174,10 +177,13 @@
       el.innerHTML = `<span class="emoji">${it.ch}</span>`;
 
       // 點擊加分
-      el.addEventListener('pointerup', (ev)=>{
+      function onHit(ev){
         ev.preventDefault();
         hit(el, it.pts, ev.clientX, ev.clientY);
-      }, {passive:false});
+      }
+      el.addEventListener('pointerdown', onHit, {passive:false});
+      el.addEventListener('click', onHit, {passive:false}); // 備援：舊機/舊瀏覽器
+
 
       // 掉到底自動清除
       el.addEventListener('animationend', ()=> el.remove(), {once:true});
@@ -199,6 +205,15 @@
       f.style.top  = (cy - 10) + 'px';
       document.body.appendChild(f);
       setTimeout(()=>f.remove(), 620);
+
+      // 停掉原本的掉落動畫，強制重啟新動畫
+      el.classList.remove('fast');   // 移除會套用 fall 的 class
+      el.style.animation = 'none';   // 立即清除動畫
+      void el.offsetHeight;          // 強制 reflow，確保下一段動畫能啟動
+      el.classList.add('hit');       // 啟動 pop 動畫
+
+      // 保險：就算 animationend 沒觸發，也在 260ms 後移除
+      setTimeout(() => { if (el.isConnected) el.remove(); }, 260);
 
       // 分數 & 效果
       score += pts; updateScore();
