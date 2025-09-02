@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>彩蛋小遊戲｜一直點就對了</title>
+  <meta name="description" content="彩蛋：從上方持續掉落的物品，點一下就加分，沒有結局，玩到開心為止。" />
+  <meta name="theme-color" content="#f6f9fe" />
+  <style>
+    :root{
+      --bg:#f6f9fe;           /* 淺藍底 */
+      --card:#ffffff;         /* 白色卡片 */
+      --text:#0b0c0f;         /* 主要文字 */
+      --muted:#667085;        /* 次要文字 */
+      --blue:#0ea5e9;         /* 藍色點綴 */
+      --orange:#fb923c;       /* 橘色點綴 */
+      --border:rgba(0,0,0,.08);
+      --shadow:0 10px 26px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;color:var(--text);background:var(--bg);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial}
+    body{overscroll-behavior:none; touch-action:manipulation; user-select:none}
+
+    /* 頂部資訊條 */
+    .hud{position:fixed;inset:12px 12px auto 12px;display:flex;gap:10px;align-items:center;z-index:50}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);box-shadow:var(--shadow);font-weight:700}
+    .muted{color:var(--muted);font-weight:600}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(14,165,233,.14),rgba(14,165,233,.08));box-shadow:var(--shadow);font-weight:700;color:#09344f}
+    .btn.orange{background:linear-gradient(180deg,rgba(251,146,60,.16),rgba(251,146,60,.08));color:#5a2c00}
+
+    /* 遊戲區域 */
+    #game{position:relative;height:100vh;overflow:hidden}
+
+    /* 掉落物 */
+    .drop{position:absolute;top:-80px;left:0;transform:translateX(-50%);font-size:42px;line-height:1;filter:drop-shadow(0 4px 10px rgba(0,0,0,.15));will-change:transform;user-select:none;cursor:pointer}
+    .drop.fast{animation:fall var(--dur) linear both}
+    .drop .label{position:absolute;left:50%;top:-18px;transform:translateX(-50%);font-size:12px;color:#fff;background:rgba(0,0,0,.35);padding:2px 6px;border-radius:999px}
+
+    /* 被點到的爆裂效果 */
+    .hit{animation:pop .22s ease-out both}
+
+    /* 漂浮 +分 效果 */
+    .float{position:absolute;pointer-events:none;left:0;top:0;font-weight:800;color:#14532d;text-shadow:0 1px 0 #fff}
+    .float.anim{animation:rise .6s ease-out both}
+
+    /* 引導面板 */
+    .intro{position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(246,249,254,.95));backdrop-filter:blur(6px);z-index:60}
+    .card{width:min(520px,92vw);padding:20px;border:1px solid var(--border);background:var(--card);border-radius:18px;box-shadow:var(--shadow);text-align:center}
+
+    @keyframes fall{from{transform:translate(-50%,-80px)} to{transform:translate(-50%,105vh)}}
+    @keyframes pop{0%{transform:translate(-50%,0) scale(1);filter:drop-shadow(0 4px 10px rgba(0,0,0,.15))}80%{transform:translate(-50%,-6px) scale(1.28)}100%{transform:translate(-50%,-8px) scale(0);opacity:0}}
+    @keyframes rise{from{transform:translate(-50%,0);opacity:1} to{transform:translate(-50%,-28px);opacity:0}}
+
+    /* RWD 微調 */
+    @media (max-width: 480px){
+      .drop{font-size:38px}
+      .btn{padding:8px 10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <div class="pill" id="score">分數：<span>0</span></div>
+    <div class="pill">最高：<span id="best">0</span></div>
+    <button class="btn" id="pause">暫停</button>
+    <button class="btn orange" id="reset">重置分數</button>
+  </div>
+
+  <main id="game" aria-label="點擊小遊戲區域"></main>
+
+  <div class="intro" id="intro">
+    <div class="card">
+      <h2 style="margin:6px 0 8px">🎉 彩蛋小遊戲｜一直點就對了</h2>
+      <p class="muted" style="margin:0 0 10px">物品會不停從上方掉落，點一下 +1～+5 分。沒有結局，玩到開心為止。</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:10px">
+        <button class="btn" id="start">開始遊戲</button>
+        <button class="btn orange" id="mute">靜音</button>
+      </div>
+      <p class="muted" style="font-size:12px;margin-top:10px">貼心提示：可以把這頁加入主畫面，隨時開玩。</p>
+    </div>
+  </div>
+
+  <audio id="sfx" preload="auto">
+    <source src="data:audio/mpeg;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQCA/////wAAAACQTEFNRTMuMTAwA8MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" type="audio/mpeg"/>
+  </audio>
+
+  <script>
+    // =====================
+    // 遊戲設定
+    // =====================
+    const EMOJIS = [
+      {ch:'🏠', pts:2},
+      {ch:'🔑', pts:3},
+      {ch:'💎', pts:5},
+      {ch:'🪙', pts:2},
+      {ch:'📦', pts:1},
+      {ch:'🧱', pts:1}
+    ];
+    const MIN_DUR = 4.2;   // 掉落最短秒數
+    const MAX_DUR = 9.0;   // 掉落最長秒數
+    const SPAWN_START = 900; // 初始產生間隔(ms)
+    const SPAWN_MIN = 420;   // 最快間隔(ms)
+    const SPAWN_ACCEL = 0.995; // 每次生成後乘上此係數 → 漸快
+    const MAX_NODES = 36;    // 螢幕上最多掉落物，避免卡頓
+
+    // 狀態
+    let score = 0;
+    let best = parseInt(localStorage.getItem('eggBest')||'0',10);
+    let playing = false, paused = false; 
+    let spawnMs = SPAWN_START; 
+    let spawnHandle = null;
+
+    // 元素
+    const $game = document.getElementById('game');
+    const $score = document.querySelector('#score span');
+    const $best  = document.getElementById('best');
+    const $pause = document.getElementById('pause');
+    const $reset = document.getElementById('reset');
+    const $intro = document.getElementById('intro');
+    const $start = document.getElementById('start');
+    const $mute  = document.getElementById('mute');
+    const $sfx   = document.getElementById('sfx');
+
+    $best.textContent = best;
+
+    // 音效控制（預設開啟）
+    let muted = false;
+    $mute.addEventListener('click', ()=>{ muted = !muted; $mute.textContent = muted ? '取消靜音' : '靜音'; });
+
+    // 開始
+    $start.addEventListener('click', startGame);
+
+    // 暫停/恢復
+    $pause.addEventListener('click', ()=>{ togglePause(); });
+    document.addEventListener('visibilitychange', ()=>{ if(document.hidden && playing){ setPause(true);} });
+
+    // 重置分數
+    $reset.addEventListener('click', ()=>{ score = 0; updateScore(); });
+
+    function startGame(){
+      if(playing) return;
+      playing = true; paused = false; score = 0; spawnMs = SPAWN_START; updateScore();
+      $intro.style.display = 'none';
+      loopSpawn();
+    }
+
+    function togglePause(){ setPause(!paused); }
+    function setPause(v){
+      paused = v; $pause.textContent = paused ? '繼續' : '暫停';
+      if(paused){ clearTimeout(spawnHandle); [...document.querySelectorAll('.drop')].forEach(n=>n.style.animationPlayState='paused'); }
+      else { [...document.querySelectorAll('.drop')].forEach(n=>n.style.animationPlayState='running'); loopSpawn(); }
+    }
+
+    function loopSpawn(){
+      if(!playing || paused) return;
+      if($game.childElementCount < MAX_NODES){ spawnOne(); }
+      spawnMs = Math.max(SPAWN_MIN, spawnMs * SPAWN_ACCEL);
+      spawnHandle = setTimeout(loopSpawn, spawnMs);
+    }
+
+    function spawnOne(){
+      const {innerWidth:w} = window;
+      const it = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+      const x = Math.random() * (w - 40) + 20; // 邊緣留白
+      const dur = (Math.random()*(MAX_DUR - MIN_DUR) + MIN_DUR).toFixed(2) + 's';
+
+      const el = document.createElement('div');
+      el.className = 'drop fast';
+      el.style.left = x + 'px';
+      el.style.setProperty('--dur', dur);
+      el.setAttribute('role','button');
+      el.setAttribute('aria-label','點擊加分');
+      el.dataset.pts = it.pts;
+      el.innerHTML = `<span class="emoji">${it.ch}</span>`;
+
+      // 點擊加分
+      el.addEventListener('pointerup', (ev)=>{
+        ev.preventDefault();
+        hit(el, it.pts, ev.clientX, ev.clientY);
+      }, {passive:false});
+
+      // 掉到底自動清除
+      el.addEventListener('animationend', ()=> el.remove(), {once:true});
+
+      $game.appendChild(el);
+    }
+
+    function hit(el, pts, cx, cy){
+      if(!el || !el.isConnected) return;
+      // 音效 & 震動
+      if(!muted){ try{ $sfx.currentTime = 0; $sfx.play(); }catch(e){} }
+      if(navigator.vibrate){ navigator.vibrate(8); }
+
+      // +分飄字
+      const f = document.createElement('div');
+      f.className = 'float anim';
+      f.textContent = '+'+pts;
+      f.style.left = cx + 'px';
+      f.style.top  = (cy - 10) + 'px';
+      document.body.appendChild(f);
+      setTimeout(()=>f.remove(), 620);
+
+      // 分數 & 效果
+      score += pts; updateScore();
+      el.classList.add('hit');
+      el.addEventListener('animationend', ()=> el.remove(), {once:true});
+    }
+
+    function updateScore(){
+      $score.textContent = score;
+      if(score > best){ best = score; localStorage.setItem('eggBest', String(best)); $best.textContent = best; }
+    }
+  </script>
+</body>
+</html>
